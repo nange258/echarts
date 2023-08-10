@@ -3,4 +3,302 @@
     padding: 0;
     list-style: none;
     text-decoration: none;
+    font-weight: normal;
+}
+
+body {
+    background: url(../images/bg.jpg) no-repeat;
+    background-size: cover;
+}
+
+
+.box {
+    min-width: 1024px;
+    max-width: 1920px;
+    min-height: 900px;
+
+    padding: .875rem 0.25rem 0;
+    box-sizing: border-box;
+    background: url(../images/logo.png) no-repeat;
+    background-size: contain;
+    display: flex;
+
+    .item {
+        flex: 3;
+        // background: orange;
+
+        &:nth-of-type(2) {
+            flex: 4;
+            // background-color: skyblue;
+            margin: 0.375rem 0.1875rem 0;
+        }
+    }
+}
+
+.bod {
+    border: 1px solid transparent;
+    border-image-source: url(../images/border.png);
+    border-width: 0.6375rem 0.475rem 0.25rem 1.65rem;
+    border-image-slice: 51 38 20 132;
+    margin-bottom: 0.25rem;
+    position: relative;
+}
+
+.mb {
+    position: absolute;
+    top: -0.6375rem;
+    left: -1.65rem;
+    right: -0.475rem;
+    bottom: -0.25rem;
+    padding: 0.225rem 0.325rem;
+}
+
+.item21 {
+    height: 1.25rem;
+    box-sizing: border-box;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+
+        li {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            h4 {
+                font-size: 0.3rem;
+                color: white;
+                margin: 0 0 0.06rem 0.1rem;
+            }
+
+            span {
+                font-size: 0.175rem;
+                color: #4c9bfd;
+            }
+
+        }
+    }
+}
+
+
+.line {
+    display: inline-block;
+    border-radius: 5px;
+    width: 4px;
+    height: 10px;
+    margin-right: 2px;
+}
+
+/* 监控部分 */
+.item22 {
+    height: 4rem;
+
+    .mb {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
+
+        .item221 {
+            font-size: 0.225rem;
+            height: 0.375rem;
+            display: flex;
+            align-items: center;
+
+            a {
+                color: #1950c4;
+            }
+
+            .active {
+                color: white;
+            }
+
+            .line {
+                display: inline-block;
+                width: 3px;
+                height: 30px;
+                background-color: #6feeef;
+                margin: 0 0.25rem;
+                border-radius: 0;
+            }
+        }
+
+        .item222 {
+            margin-top: 0.125rem;
+            box-sizing: border-box;
+            flex: 1;
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+
+            .top {
+                height: 0.4375rem;
+                color: #68d8fe;
+                line-height: 0.4375rem;
+                background-color: rgba(255, 255, 255, 0.1);
+                font-size: 0.15rem;
+
+
+            }
+
+            /* 滚动动画 */
+            .item2221 {
+                flex: 1;
+                overflow: hidden;
+
+
+                .item22211 {
+
+                    &:hover {
+                        animation: none;
+                    }
+
+                    div {
+                        &:hover {
+
+
+                            color: #fff;
+                            background: #b4e0ef;
+
+                        }
+
+                    }
+
+                    animation: rollPlay linear 10s infinite;
+                }
+
+            }
+        }
+    }
+
+}
+
+.col:nth-of-type(1) {
+    width: 1rem;
+
+}
+
+.col:nth-of-type(2) {
+    width: 2.5rem;
+}
+
+.col:nth-of-type(3) {
+    width: 1rem;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: 0.15rem;
+    line-height: 0.435rem;
+    color: #61a8ff;
+}
+
+@keyframes rollPlay {
+    0% {}
+
+    100% {
+        transform: translateY(-40%);
+    }
+}
+
+
+/* 点位分布部分 */
+.item23 {
+    height: 2.6rem;
+
+    h3 {
+        color: white;
+        font-size: 0.2rem;
+        font-weight: 400;
+    }
+
+    .chart {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.125rem;
+
+        .pie {
+            width: 3.9rem;
+            height: 2.4rem;
+
+        }
+
+        .data {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 2.1rem;
+            padding: 0.45rem 0.3rem;
+            box-sizing: border-box;
+            background-image: url(../images/rect.png);
+            background-size: cover;
+
+            .mmm {
+                h4 {
+                    font-size: 0.25rem;
+                    color: #fff;
+                }
+
+                span {
+                    display: block;
+                    color: #f8ab05;
+                    font-size: 0.175rem;
+                }
+
+            }
+        }
+    }
+}
+
+
+.item32 {
+    height: 2.6rem;
+    display: flex;
+
+    h3 {
+        color: white;
+        font-size: 0.2rem;
+        font-weight: 400;
+    }
+
+    .chart {
+        display: flex;
+        margin-top: 0.125rem;
+
+        .bar {
+            width: 7.35rem;
+            height: 2.4rem;
+            /* background-color: rgb(211, 133, 133); */
+        }
+
+        .data {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 2.1rem;
+            padding: 0.45rem 0.3rem;
+            box-sizing: border-box;
+            background-image: url(../images/rect.png);
+            background-size: cover;
+
+            .mmm {
+                h4 {
+                    font-size: 0.25rem;
+                    color: #fff;
+                }
+
+                span {
+                    display: block;
+                    color: #4cfde2;
+                    font-size: 0.175rem;
+                }
+            }
+        }
+
+    }
+
 }
