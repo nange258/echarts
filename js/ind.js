@@ -220,11 +220,11 @@
             ind_ = ind_ >= filters_.length ? 0 : ind_;
             // console.log(ind_);
             filters_[ind_].onclick();
-        }, 1000);
+        }, 2000);
     }
     auto();
 
-    var order = document.getElementsByClassName('order')[0];
+    var order = document.getElementsByClassName('item4')[0];
     order.onmouseover = function () {
         clearInterval(timer);
     }
@@ -233,6 +233,271 @@
     order.onmouseout = function () {
         auto();
     }
+})();
+
+
+// 销售统计曲线图
+
+(function () {
+    var myChart = echarts.init(document.querySelector('.sline'));
+
+    // 折线图的数据
+
+    var data = {
+        year: [
+            [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+            [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
+        ],
+        quarter: [
+            [23, 75, 12, 97, 21, 67, 98, 21, 43, 64, 76, 38],
+            [43, 31, 65, 23, 78, 21, 82, 64, 43, 60, 19, 34]
+        ],
+        month: [
+            [34, 87, 32, 76, 98, 12, 32, 87, 39, 36, 29, 36],
+            [56, 43, 98, 21, 56, 87, 43, 12, 43, 54, 12, 98]
+        ],
+        week: [
+            [43, 73, 62, 54, 91, 54, 84, 43, 86, 43, 54, 53],
+            [32, 54, 34, 87, 32, 45, 62, 68, 93, 54, 54, 24]
+        ]
+    }
+    var option = {
+
+        tooltip: {
+            trigger: 'axis'
+        },
+        color: ['#00f2f1', '#ed3f35'],
+        legend: {
+            data: ['Email', 'Union Ads'],
+            textStyle: {
+                color: '#4c9bfd' // 图例文字颜色
+            },
+            right: '10%'
+
+        },
+        grid: {
+            top: '20%',
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true,
+            show: true,// 显示边框
+            borderColor: '#012f4a',// 边框颜色
+            // borderColor: 'red',// 边框颜色
+        },
+
+        xAxis: {
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            axisTick: {
+                show: false // 去除刻度线
+            },
+            axisLabel: {
+                color: '#4c9bfd' // 文本颜色
+            },
+            axisLine: {
+                show: false // 去除轴线
+            },
+            boundaryGap: false  // 去除轴内间距
+        },
+        yAxis: {
+            type: 'value',
+            axisTick: {
+                show: false  // 去除刻度
+            },
+            axisLabel: {
+                color: '#4c9bfd' // 文字颜色
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#012f4a' // 分割线颜色
+                    // color: 'red' // 分割线颜色
+                }
+            }
+        },
+        series: [
+            {
+
+                name: '预期销售额',
+                // data: [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+                data: data.year[0],
+                type: 'line',
+                smooth: true,
+                stack: 'Total'
+
+            },
+            {
+                name: '实际销售额',
+                // data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79], type: 'line',
+                data: data.year[1],
+                type: 'line',
+                smooth: true,
+                stack: 'Total',
+            }
+        ]
+    };
+    myChart.setOption(option);
+
+    //点击timeTab切换对应的数据曲线
+
+    var timeTabs = document.getElementsByClassName('timeTab');
+
+    var ind_ = 0;
+    for (var i = 0; i < timeTabs.length; i++) {
+        timeTabs[i].setAttribute('index', i);
+        timeTabs[i].onclick = function () {
+            ind_ = this.getAttribute('index');
+
+
+            // 设置timeTab选中的的样式  active
+            for (var j = 0; j < timeTabs.length; j++) {
+                timeTabs[j].classList.remove('active');
+                timeTabs[ind_].classList.add('active');
+            }
+            // 获取自定属性的 dataTime的值
+            var time = this.getAttribute("data-time");
+            // console.log(time);
+            // console.log(data[time][0]);
+            // console.log(data[time][1]);
+
+            option.series[0].data = data[time][0];
+            option.series[1].data = data[time][1];
+
+            myChart.setOption(option);
+        }
+
+    }
+
+    var timer;
+    function auto() {
+        timer = setInterval(function () {
+            ind_++;
+            ind_ = ind_ >= timeTabs.length ? 0 : ind_;
+            timeTabs[ind_].onclick();
+        }, 2000);
+    }
+    auto();
+
+    var sales = document.querySelector('.item42');
+    sales.onmouseenter = function () {
+        clearInterval(timer);
+    }
+
+    sales.onmouseleave = function () {
+        auto();
+    }
+
+
+
+
+    window.addEventListener('load', function () {
+        myChart.resize();
+    })
+    window.addEventListener('resize', function () {
+        myChart.resize();
+    })
+})();
+
+(function () {
+    var myChart = echarts.init(document.querySelector('.radar'));
+
+
+    const lineStyle = {
+        width: 1,
+        opacity: 0.5
+    };
+
+    var option = {
+
+        tooltip: {
+            show: true,
+            position: ['60%', '10%'],
+            backgroundColor: 'rgba(255,255,255,.3)'
+        },
+
+        radar: {
+
+            // 控制雷达图最大圆的大小
+            radius: '65%',
+            center: ['50%', '50%'],
+            // 分割线的个数
+            splitNumber: 4,
+            indicator: [
+                { name: '机场', max: 100 },
+                { name: '商场', max: 100 },
+                { name: '火车站', max: 100 },
+                { name: '汽车站', max: 100 },
+                { name: '地铁', max: 100 }
+            ],
+            shape: 'circle',
+
+            axisName: {
+                color: '#4c9bfd'
+                // color: 'red'
+            },
+            // 雷达图分割线的颜色  一个个圆圈的颜色
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.5)'
+                    // color: [
+                    //     'rgba(238, 197, 102, 0.1)',
+                    //     'rgba(238, 197, 102, 0.2)',
+                    //     'rgba(238, 197, 102, 0.4)',
+                    //     'rgba(238, 197, 102, 0.6)',
+                    //     'rgba(238, 197, 102, 0.8)',
+                    //     'rgba(238, 197, 102, 1)'
+                    // ].reverse()
+                }
+            },
+            splitArea: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.5)'
+                }
+            }
+        },
+        series: [
+            {
+                name: 'Beijing',
+
+                type: 'radar',
+                lineStyle: {
+                    normal: {
+                        color: '#fff',
+                    }
+                },
+                data: [[90, 100, 56, 11, 34]],
+                // 小圆点
+                symbol: 'circle',
+                // 拐点大小
+                symbolSize: 5,
+                // 小圆点（拐点）设置为白色
+                itemStyle: {
+                    color: '#fff'
+                },
+                // 在圆点上显示相关数据
+                label: {
+                    show: true,
+                    color: '#fff',
+                    fontSize: 10
+                },
+                areaStyle: {
+                    color: 'rgba(238, 197, 102, 0.6)',
+                    // color: 'red',
+                    // opacity: 0.1
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+    window.addEventListener('load', function () {
+        myChart.resize();
+    })
+    window.addEventListener('resize', function () {
+        myChart.resize();
+    })
 })();
 
 
